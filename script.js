@@ -34,6 +34,55 @@ const myLibrary = [
     readStatus: "read",
     id: "4d5e6f7a-8b9c-4d0e-af1b-2c3d4e5f6a7b",
   },
+  {
+    title: "The Copper Lantern",
+    author: "Noah Fitzgerald",
+    numOfPages: 289,
+    readStatus: "not yet read",
+    id: "a1c3e5f7-2b4d-4a6c-8e0f-1b3d5f7a9c2e",
+  },
+  {
+    title: "Salt and Stone",
+    author: "Ingrid Larsson",
+    numOfPages: 345,
+    readStatus: "reading",
+    id: "b2d4f6a8-3c5e-4b7d-9f1a-2c4e6a8b0d3f",
+  },
+  {
+    title: "The Paper Kingdom",
+    author: "Rajiv Malhotra",
+    numOfPages: 176,
+    readStatus: "read",
+    id: "c3e5a7b9-4d6f-4c8e-a0b2-3d5f7a9c1e4b",
+  },
+  {
+    title: "Under a Borrowed Sky",
+    author: "Elena Kowalski",
+    numOfPages: 233,
+    readStatus: "not yet read",
+    id: "d4f6b8c0-5e7a-4d9f-b1c3-4e6a8b0d2f5c",
+  },
+  {
+    title: "The Clockmaker's Daughter",
+    author: "Thomas Blackwood",
+    numOfPages: 398,
+    readStatus: "read",
+    id: "e5a7c9d1-6f8b-4e0a-c2d4-5f7b9c1e3a6d",
+  },
+  {
+    title: "Feathers of the North",
+    author: "Anya Petrov",
+    numOfPages: 210,
+    readStatus: "not yet read",
+    id: "f6b8d0e2-7a9c-4f1b-d3e5-6a8c0d2f4b7e",
+  },
+  {
+    title: "The Glass Orchard",
+    author: "Marcus Delaney",
+    numOfPages: 264,
+    readStatus: "reading",
+    id: "a7c9e1f3-8b0d-4a2c-e4f6-7b9d1e3f5a8c",
+  },
 ];
 
 function Book(title, author, numOfPages, readStatus) {
@@ -74,12 +123,13 @@ function addBookDisplay(library) {
     div.appendChild(pages);
 
     const status = document.createElement("span");
-    status.textContent = `status: ${book.readStatus}`;
+    status.textContent = `Status: ${book.readStatus}`;
     div.appendChild(status);
 
     const removeButton = document.createElement("button");
-    removeButton.textContent = "Delete"
-    div.appendChild(removeButton)
+    removeButton.textContent = "Delete";
+    removeButton.classList = "delete-button";
+    div.appendChild(removeButton);
 
     div.dataset.id = book.id;
   }
