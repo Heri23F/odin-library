@@ -45,10 +45,6 @@ function Book(title, author, numOfPages, readStatus) {
   this.numOfPages = numOfPages;
   this.readStatus = readStatus;
   this.id = crypto.randomUUID();
-
-  console.log(
-    `title: ${this.title} id: ${this.id} author: ${this.author} number pages: ${this.numOfPages} status: ${this.readStatus}`,
-  );
 }
 
 function addBookToLibrary(book) {
@@ -60,7 +56,7 @@ const displayBook = document.querySelector(".display-book");
 function addBookDisplay(library) {
   const fragment = new DocumentFragment();
 
-  for (book of library) {
+  for (const book of library) {
     const div = document.createElement("div");
     div.classList = "book-card";
     fragment.appendChild(div);
@@ -81,17 +77,53 @@ function addBookDisplay(library) {
     status.textContent = `status: ${book.readStatus}`;
     div.appendChild(status);
 
-    const bookId = document.createElement("span");
-    bookId.textContent = `id: ${book.id}`;
-    div.appendChild(bookId);
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Delete"
+    div.appendChild(removeButton)
+
+    div.dataset.id = book.id;
   }
 
   return displayBook.appendChild(fragment);
 }
 
-function resetDisplay() {
+function resetDisplayBook() {
   const bookCard = document.querySelectorAll(".book-card");
-  bookCard.remove();
+  for (const item of bookCard) {
+    item.remove();
+  }
 }
 
 addBookDisplay(myLibrary);
+
+const form = document.querySelector("#modal-form");
+const modal = document.querySelector("#modal");
+const openModal = document.querySelector("#open-modal");
+
+openModal.addEventListener("click", () => {
+  modal.showModal();
+});
+
+form.addEventListener("submit", (event) => {
+  const formData = new FormData(form);
+  const formObject = {};
+
+  for (const [name, value] of formData.entries()) {
+    formObject[name] = value;
+  }
+
+  const newBook = new Book(
+    formObject.title,
+    formObject.author,
+    Number(formObject.pages),
+    formObject.status,
+  );
+
+  addBookToLibrary(newBook);
+  resetDisplayBook();
+  addBookDisplay(myLibrary);
+
+  modal.close();
+  event.preventDefault();
+  form.reset();
+});

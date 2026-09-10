@@ -12,10 +12,38 @@
       <div class="header">
         <h1>Odin library</h1>
       </div>
-      <div class="sidebar">
-        
+      <div class="main">
+        <div class="modal-wraper">
+          <button id="open-modal" class="open-modal-button">add book</button>
+          <dialog id="modal">
+            <form id="modal-form">
+              <legend>Book Detail</legend>
+              <div class="input-wraper">
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title" required/>
+              </div>
+              <div class="input-wraper">
+                <label for="author">Author:</label>
+                <input type="text" name="author" id="author" required/>
+              </div>
+              <div class="input-wraper">
+                <label for="pages">Pages:</label>
+                <input type="number" name="pages" id="pages" required/>
+              </div>
+              <div class="input-wraper">
+                <label for="status">Status:</label>
+                <select name="status" id="status">
+                  <option value="not yet read" selected>not yet read</option>
+                  <option value="read">read</option>
+                  <option value="reading">reading</option>
+                </select>
+              </div>
+              <button id="close-modal">add</button>
+            </form>
+          </dialog>
+        </div>
+        <div class="display-book"></div>
       </div>
-      <div class="display-book"></div>
     </div>
   </body>
 </html>

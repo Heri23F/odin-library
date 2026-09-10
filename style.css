@@ -3,12 +3,17 @@
   margin: 0;
 }
 
+dialog {
+  margin: auto;
+}
+
 .book-card {
   display: flex;
   flex-direction: column;
   border: 1px solid black;
   border-radius: 3px;
-  padding: 8px;
+  padding: 16px;
+  gap: 4px;
 }
 
 .display-book {
@@ -19,21 +24,77 @@
 
 .container {
   display: grid;
-  grid-template-columns: 1fr 3fr;
   grid-template-rows: auto 1fr;
-  grid-template-areas: "header header" "sidebar display";
+  grid-template-areas: "header header" "display display";
+  row-gap: 16px;
 
   .header {
     grid-area: header;
 
     display: flex;
-    justify-content: center;
-    padding: 8px 0 32px 0;
+    justify-content: flex-start;
+    padding: 16px;
+    border: 1px solid black;
   }
-  .sidebar {
-    grid-area: sidebar;
-  }
-  .display-book {
+
+  .main {
     grid-area: display;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    row-gap: 8px;
+    padding: 0 16px;
   }
+}
+
+dialog form {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  gap: 16px;
+  border-radius: 3px;
+  font-size: 1em;
+
+  legend {
+    align-self: center;
+    font-weight: 800;
+    font-size: 1.5em;
+  }
+
+  .input-wraper {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      height: 20px;
+    }
+
+    select {
+      height: 24px;
+    }
+    input,
+    select {
+      border-radius: 4px;
+    }
+  }
+
+  button {
+    height: 32px;
+    border-radius: 4px;
+  }
+}
+
+dialog[open] {
+  border: 1px solid black;
+  border-radius: 8px;
+  width: 256px;
+}
+
+.modal-wraper {
+  display: flex;
+  justify-content: center;
+}
+
+.open-modal-button {
+  height: 40px;
+  aspect-ratio: 3 / 1;
 }
