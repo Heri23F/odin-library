@@ -129,9 +129,8 @@ function addBookDisplay(library) {
     const removeButton = document.createElement("button");
     removeButton.textContent = "Delete";
     removeButton.classList = "delete-button";
+    removeButton.dataset.id = book.id;
     div.appendChild(removeButton);
-
-    div.dataset.id = book.id;
   }
 
   return displayBook.appendChild(fragment);
@@ -177,3 +176,25 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   form.reset();
 });
+
+function deleteBook(bookID, library) {
+  for(const book of library) {
+    if(book.id === bookID) {
+      library.splice(library.indexOf(book), 1)
+    }
+  }
+}
+
+const bookContainer = document.querySelector(".display-book")
+
+bookContainer.addEventListener("click", (event) => {
+  const targetBook = event.target.closest(".delete-button")
+  const targetBookId = targetBook.dataset.id
+
+  if(targetBook) {
+    deleteBook(targetBookId, myLibrary)
+  }
+  
+  resetDisplayBook();
+  return addBookDisplay(myLibrary);
+})
