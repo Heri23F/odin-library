@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "WalkieValkyrieRegular";
+  src:
+    url("/fonts/Valkyrie/WalkieValkyrie-Regular.woff2") format("woff2"),
+    url("/fonts/Valkyrie/WalkieValkyrie-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
