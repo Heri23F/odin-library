@@ -98,20 +98,38 @@ body {
       font-size: 1em;
       box-shadow: 0 10px 25px rgba(17, 26, 25, 0.15);
 
-      button {
-        background-color: var(--red);
-        color: white;
-        border: 2px solid var(--red);
-        border-radius: 4px;
-        align-self: flex-end;
-        width: 80px;
-        padding: 8px;
-        font-weight: 600;
-      }
+      .card-button {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
 
-      button:hover {
-        background-color: white;
-        color: var(--red);
+        button {
+          border-radius: 4px;
+          padding: 8px;
+          font-weight: 400;
+        }
+
+        .delete-button {
+          background-color: var(--red);
+          color: white;
+          border: 2px solid var(--red);
+        }
+
+        .delete-button:hover {
+          background-color: white;
+          color: var(--red);
+        }
+
+        .change-status{
+          background-color: var(--header-main);
+          color: var(--header-secondary);
+          border: 2px solid var(--header-main);
+        }
+
+        .change-status:hover {
+          background-color: white;
+          color: var(--header-main);
+        }
       }
     }
   }

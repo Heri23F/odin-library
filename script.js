@@ -1,92 +1,102 @@
-const myLibrary = [
+const premadeLibrary = [
   {
     title: "The Silent Ocean",
     author: "Maria Chen",
     numOfPages: 312,
     readStatus: "read",
-    id: "7f3e9a2b-4c1d-4e8f-9a5b-1d2c3e4f5a6b",
+    // id: "7f3e9a2b-4c1d-4e8f-9a5b-1d2c3e4f5a6b",
   },
   {
     title: "Echoes of Tomorrow",
     author: "James Whitfield",
     numOfPages: 198,
     readStatus: "not yet read",
-    id: "2b8c4d6e-9f1a-4b3c-8d5e-6f7a8b9c0d1e",
+    // id: "2b8c4d6e-9f1a-4b3c-8d5e-6f7a8b9c0d1e",
   },
   {
     title: "The Last Cartographer",
     author: "Amara Okafor",
     numOfPages: 421,
     readStatus: "not yet read",
-    id: "e5f6a7b8-c9d0-4e1f-a2b3-c4d5e6f7a8b9",
+    // id: "e5f6a7b8-c9d0-4e1f-a2b3-c4d5e6f7a8b9",
   },
   {
     title: "Whispers in the Rain",
     author: "Lucas Bennett",
     numOfPages: 267,
     readStatus: "not yet read",
-    id: "9a1b2c3d-4e5f-4a6b-9c7d-8e9f0a1b2c3d",
+    // id: "9a1b2c3d-4e5f-4a6b-9c7d-8e9f0a1b2c3d",
   },
   {
     title: "Fragments of Light",
     author: "Sofia Reyes",
     numOfPages: 154,
     readStatus: "read",
-    id: "4d5e6f7a-8b9c-4d0e-af1b-2c3d4e5f6a7b",
+    // id: "4d5e6f7a-8b9c-4d0e-af1b-2c3d4e5f6a7b",
   },
   {
     title: "The Copper Lantern",
     author: "Noah Fitzgerald",
     numOfPages: 289,
     readStatus: "not yet read",
-    id: "a1c3e5f7-2b4d-4a6c-8e0f-1b3d5f7a9c2e",
+    // id: "a1c3e5f7-2b4d-4a6c-8e0f-1b3d5f7a9c2e",
   },
   {
     title: "Salt and Stone",
     author: "Ingrid Larsson",
     numOfPages: 345,
     readStatus: "not yet read",
-    id: "b2d4f6a8-3c5e-4b7d-9f1a-2c4e6a8b0d3f",
+    // id: "b2d4f6a8-3c5e-4b7d-9f1a-2c4e6a8b0d3f",
   },
   {
     title: "The Paper Kingdom",
     author: "Rajiv Malhotra",
     numOfPages: 176,
     readStatus: "read",
-    id: "c3e5a7b9-4d6f-4c8e-a0b2-3d5f7a9c1e4b",
+    // id: "c3e5a7b9-4d6f-4c8e-a0b2-3d5f7a9c1e4b",
   },
   {
     title: "Under a Borrowed Sky",
     author: "Elena Kowalski",
     numOfPages: 233,
     readStatus: "not yet read",
-    id: "d4f6b8c0-5e7a-4d9f-b1c3-4e6a8b0d2f5c",
+    // id: "d4f6b8c0-5e7a-4d9f-b1c3-4e6a8b0d2f5c",
   },
   {
     title: "The Clockmaker's Daughter",
     author: "Thomas Blackwood",
     numOfPages: 398,
     readStatus: "read",
-    id: "e5a7c9d1-6f8b-4e0a-c2d4-5f7b9c1e3a6d",
+    // id: "e5a7c9d1-6f8b-4e0a-c2d4-5f7b9c1e3a6d",
   },
   {
     title: "Feathers of the North",
     author: "Anya Petrov",
     numOfPages: 210,
     readStatus: "not yet read",
-    id: "f6b8d0e2-7a9c-4f1b-d3e5-6a8c0d2f4b7e",
+    // id: "f6b8d0e2-7a9c-4f1b-d3e5-6a8c0d2f4b7e",
   },
   {
     title: "The Glass Orchard",
     author: "Marcus Delaney",
     numOfPages: 264,
     readStatus: "not yet read",
-    id: "a7c9e1f3-8b0d-4a2c-e4f6-7b9d1e3f5a8c",
+    // id: "a7c9e1f3-8b0d-4a2c-e4f6-7b9d1e3f5a8c",
   },
 ];
 
+const myLibrary = [];
 
+for (const book of premadeLibrary) {
+  const newBook = new Book(
+    book.title,
+    book.author,
+    book.numOfPages,
+    book.readStatus,
+  );
 
+  myLibrary.push(newBook);
+}
 
 function Book(title, author, numOfPages, readStatus) {
   if (!new.target) {
@@ -129,11 +139,21 @@ function addBookDisplay(library) {
     status.textContent = `Status: ${book.readStatus}`;
     div.appendChild(status);
 
+    const cardButton = document.createElement("div");
+    cardButton.classList = "card-button";
+    div.appendChild(cardButton);
+
+    const changeStatusButton = document.createElement("button");
+    changeStatusButton.textContent = "Change Status";
+    changeStatusButton.classList = "change-status";
+    changeStatusButton.dataset.id = book.id;
+    cardButton.appendChild(changeStatusButton);
+
     const removeButton = document.createElement("button");
     removeButton.textContent = "Delete";
     removeButton.classList = "delete-button";
     removeButton.dataset.id = book.id;
-    div.appendChild(removeButton);
+    cardButton.appendChild(removeButton);
   }
 
   return displayBook.appendChild(fragment);
@@ -191,16 +211,29 @@ function deleteBook(bookID, library) {
 const bookContainer = document.querySelector(".display-book");
 
 bookContainer.addEventListener("click", (event) => {
-  const targetBook = event.target.closest(".delete-button");
-  const targetBookId = targetBook.dataset.id;
+  const targetDelete = event.target.closest(".delete-button");
+  const targetChange = event.target.closest(".change-status");
 
-  if (targetBook) {
-    deleteBook(targetBookId, myLibrary);
+  if (targetDelete) {
+    const deleteId = targetDelete.dataset.id;
+    deleteBook(deleteId, myLibrary);
   }
 
+  if (targetChange) {
+    const changeId = targetChange.dataset.id;
+    changeStatusBook(changeId)
+  }
   resetDisplayBook();
   return addBookDisplay(myLibrary);
 });
+
+function changeStatusBook(id) {
+  for (const book of myLibrary) {
+    if (book.id === id) {
+      book.changeStatus();
+    }
+  }
+}
 
 Book.prototype.changeStatus = function () {
   if (this.readStatus === "read") {
