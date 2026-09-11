@@ -85,6 +85,9 @@ const myLibrary = [
   },
 ];
 
+
+
+
 function Book(title, author, numOfPages, readStatus) {
   if (!new.target) {
     throw Error("You need use the 'new' operator");
@@ -178,23 +181,32 @@ form.addEventListener("submit", (event) => {
 });
 
 function deleteBook(bookID, library) {
-  for(const book of library) {
-    if(book.id === bookID) {
-      library.splice(library.indexOf(book), 1)
+  for (const book of library) {
+    if (book.id === bookID) {
+      library.splice(library.indexOf(book), 1);
     }
   }
 }
 
-const bookContainer = document.querySelector(".display-book")
+const bookContainer = document.querySelector(".display-book");
 
 bookContainer.addEventListener("click", (event) => {
-  const targetBook = event.target.closest(".delete-button")
-  const targetBookId = targetBook.dataset.id
+  const targetBook = event.target.closest(".delete-button");
+  const targetBookId = targetBook.dataset.id;
 
-  if(targetBook) {
-    deleteBook(targetBookId, myLibrary)
+  if (targetBook) {
+    deleteBook(targetBookId, myLibrary);
   }
-  
+
   resetDisplayBook();
   return addBookDisplay(myLibrary);
-})
+});
+
+Book.prototype.changeStatus = function () {
+  if (this.readStatus === "read") {
+    return (this.readStatus = "not yet read");
+  }
+  if (this.readStatus === "not yet read") {
+    return (this.readStatus = "read");
+  }
+};
