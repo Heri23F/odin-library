@@ -10,7 +10,7 @@ const myLibrary = [
     title: "Echoes of Tomorrow",
     author: "James Whitfield",
     numOfPages: 198,
-    readStatus: "reading",
+    readStatus: "not yet read",
     id: "2b8c4d6e-9f1a-4b3c-8d5e-6f7a8b9c0d1e",
   },
   {
@@ -45,7 +45,7 @@ const myLibrary = [
     title: "Salt and Stone",
     author: "Ingrid Larsson",
     numOfPages: 345,
-    readStatus: "reading",
+    readStatus: "not yet read",
     id: "b2d4f6a8-3c5e-4b7d-9f1a-2c4e6a8b0d3f",
   },
   {
@@ -80,7 +80,7 @@ const myLibrary = [
     title: "The Glass Orchard",
     author: "Marcus Delaney",
     numOfPages: 264,
-    readStatus: "reading",
+    readStatus: "not yet read",
     id: "a7c9e1f3-8b0d-4a2c-e4f6-7b9d1e3f5a8c",
   },
 ];
