@@ -65,16 +65,11 @@ body {
       border: 3px solid var(--header-secondary);
       background-color: var(--header-secondary);
       color: var(--header-main);
-
-      box-shadow: 0 4px 14px rgba(248, 215, 148, 0.4);
-      transition: all 0.2s ease;
     }
 
     .open-modal-button:hover {
       background-color: var(--header-main);
       color: var(--header-secondary);
-      box-shadow: 0 6px 20px rgba(248, 215, 148, 0.6);
-      transform: translateY(-1px);
     }
   }
 
@@ -96,9 +91,7 @@ body {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      border: 2px solid var(--header-secondary);
-      background-color: var(--header-main);
-      color: var(--header-secondary);
+      color: var(--header-main);
       padding: 8px 16px;
       border-radius: 8px;
       gap: 4px;
@@ -114,18 +107,13 @@ body {
         width: 80px;
         padding: 8px;
         font-weight: 600;
-
-        box-shadow: 0 4px 14px rgba(229, 62, 62, 0.4);
-        transition: all 0.2s ease;
       }
 
       button:hover {
         background-color: white;
         color: var(--red);
-
-        box-shadow: 0 6px 20px rgba(229, 62, 62, 0.6);
-        transform: translateY(-1px);
       }
     }
   }
 }
+
