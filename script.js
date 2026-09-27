@@ -172,6 +172,19 @@ const ui = (() => {
       const bookTextDiv = document.createElement("div");
       bookTextDiv.classList = "booktext-div";
 
+      const buttonDiv = document.createElement("div");
+      buttonDiv.classList = "button-div";
+
+      const removeButton = document.createElement("button");
+      removeButton.classList = "remove-button";
+      removeButton.textContent = "Remove";
+
+      const changeStatus = document.createElement("button");
+      changeStatus.classList = "change-status";
+      changeStatus.textContent = book.readStatus === "Read" ? "Unread" : "Read";
+
+      buttonDiv.append(changeStatus, removeButton);
+
       Object.entries(book).forEach((item) => {
         const [keys, value] = item;
 
@@ -186,12 +199,15 @@ const ui = (() => {
         bookTextDiv.append(keysText, valueText);
       });
 
-      bookDiv.append(bookTextDiv);
+      bookDiv.append(bookTextDiv, buttonDiv);
       bookContainer.append(bookDiv);
     });
+
     container.append(bookContainer);
   };
 
-  createHeader()
-  createMain()
+  createHeader();
+  createMain();
 })();
+
+
