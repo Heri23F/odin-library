@@ -116,6 +116,19 @@ class Library {
     console.log(`Book with this id: ${id} removed`);
     return;
   }
+
+  static changeStatusById(id) {
+    let bookIndex = this.#bookList.findIndex((book) => book.id === id);
+
+    if (bookIndex === -1) {
+      return console.log(`Book with this id: ${id} not found`);
+    }
+
+    this.#bookList[bookIndex].switchStatus();
+    console.log(
+      `Book status change to ${this.#bookList[bookIndex].readStatus}`,
+    );
+  }
 }
 
 premadeLibrary.forEach((book) => {
@@ -214,8 +227,29 @@ const ui = (() => {
     renderBook();
     main.append(bookContainer);
     container.append(main);
-    return { updateBook };
+    return { updateBook, bookContainer };
   })();
+
+  const clickHandler = (event) => {
+    const target = event.target;
+
+    if (
+      target.className !== "remove-button" &&
+      target.className !== "change-status"
+    ) {
+      return;
+    }
+
+    const id = target.closest(".book-div").dataset.id;
+    target.className === "remove-button"
+      ? Library.removeBookById(id)
+      : Library.changeStatusById(id);
+
+    renderMain.updateBook();
+    return;
+  };
+
+  renderMain.bookContainer.addEventListener("click", clickHandler);
 
   return { updateBook: renderMain.updateBook };
 })();
