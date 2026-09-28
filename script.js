@@ -127,40 +127,30 @@ premadeLibrary.forEach((book) => {
 const ui = (() => {
   const container = document.querySelector(".container");
 
-  const createElement = (tag, elText, elClass) => {
-    const el = document.createElement(tag)
+  const createElement = (tag, elClass, elText = undefined) => {
+    const el = document.createElement(tag);
     if (elClass) {
-      el.classList = elClass
+      el.classList = elClass;
     }
     if (elText !== undefined) {
-      el.textContent = elText
+      el.textContent = elText;
     }
 
-    return el
-  }
+    return el;
+  };
 
   const createHeader = (() => {
-    const header = document.createElement("div");
-    header.classList = "header";
-
-    const logo = document.createElement("h1");
-    logo.classList = "logo";
-    logo.textContent = "My Library";
-
-    const addButton = document.createElement("button");
-    addButton.classList = "add-button";
-    addButton.textContent = "New Book";
+    const header = createElement("div", "header");
+    const logo = createElement("h1", "logo", "My Library");
+    const addButton = createElement("button", "add-button", "New Book");
 
     header.append(logo, addButton);
     container.append(header);
   })();
 
   const createMain = (() => {
-    const main = document.createElement("div");
-    main.classList = "main";
-
-    const bookContainer = document.createElement("div");
-    bookContainer.classList = "book-container";
+    const main = createElement("div", "main");
+    const bookContainer = createElement("div", "book-container");
 
     const classMap = {
       author: "author",
@@ -176,44 +166,35 @@ const ui = (() => {
       readStatus: "Status",
     };
 
+    const createButton = (book) => {
+      const buttonDiv = createElement("div", "button-div");
+      buttonDiv.append(
+        createElement(
+          "button",
+          "change-status",
+          book.readStatus === "Read" ? "Unread" : "Read",
+        ),
+        createElement("button", "remove-button", "Remove"),
+      );
+
+      return buttonDiv;
+    };
+
     const createBook = () => {
       Library.booklist.forEach((book) => {
-        const bookDiv = document.createElement("div");
-        bookDiv.classList = "book-div";
+        const bookDiv = createElement("div", "book-div");
         bookDiv.dataset.id = book.id;
-
-        const bookTextDiv = document.createElement("div");
-        bookTextDiv.classList = "booktext-div";
-
-        const buttonDiv = document.createElement("div");
-        buttonDiv.classList = "button-div";
-
-        const removeButton = document.createElement("button");
-        removeButton.classList = "remove-button";
-        removeButton.textContent = "Remove";
-
-        const changeStatus = document.createElement("button");
-        changeStatus.classList = "change-status";
-        changeStatus.textContent =
-          book.readStatus === "Read" ? "Unread" : "Read";
-
-        buttonDiv.append(changeStatus, removeButton);
+        const bookTextDiv = createElement("div", "booktext-div");
 
         Object.entries(book).forEach((item) => {
           const [keys, value] = item;
-
-          const keysText = document.createElement("span");
-          keysText.classList = `keys ${classMap[keys]}`;
-          keysText.textContent = keysTextMap[keys];
-
-          const valueText = document.createElement("span");
-          valueText.classList = `value ${classMap[keys]}`;
-          valueText.textContent = value;
-
-          bookTextDiv.append(keysText, valueText);
+          bookTextDiv.append(
+            createElement("span", `keys ${classMap[keys]}`, keysTextMap[keys]),
+            createElement("span", `value ${classMap[keys]}`, value),
+          );
         });
 
-        bookDiv.append(bookTextDiv, buttonDiv);
+        bookDiv.append(bookTextDiv, createButton(book));
         bookContainer.append(bookDiv);
       });
 
