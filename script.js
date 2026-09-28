@@ -130,7 +130,7 @@ const ui = (() => {
   const createElement = (tag, elClass, elText = undefined) => {
     const el = document.createElement(tag);
     if (elClass) {
-      el.classList = elClass;
+      el.className = elClass;
     }
     if (elText !== undefined) {
       el.textContent = elText;
@@ -139,7 +139,7 @@ const ui = (() => {
     return el;
   };
 
-  const createHeader = (() => {
+  const renderHeader = (() => {
     const header = createElement("div", "header");
     const logo = createElement("h1", "logo", "My Library");
     const addButton = createElement("button", "add-button", "New Book");
@@ -148,7 +148,7 @@ const ui = (() => {
     container.append(header);
   })();
 
-  const createMain = (() => {
+  const renderMain = (() => {
     const main = createElement("div", "main");
     const bookContainer = createElement("div", "book-container");
 
@@ -180,37 +180,42 @@ const ui = (() => {
       return buttonDiv;
     };
 
-    const createBook = () => {
-      Library.booklist.forEach((book) => {
-        const bookDiv = createElement("div", "book-div");
-        bookDiv.dataset.id = book.id;
-        const bookTextDiv = createElement("div", "booktext-div");
-
-        Object.entries(book).forEach((item) => {
-          const [keys, value] = item;
-          bookTextDiv.append(
-            createElement("span", `keys ${classMap[keys]}`, keysTextMap[keys]),
-            createElement("span", `value ${classMap[keys]}`, value),
-          );
-        });
-
-        bookDiv.append(bookTextDiv, createButton(book));
-        bookContainer.append(bookDiv);
+    const createBookText = (book) => {
+      const bookTextDiv = createElement("div", "booktext-div");
+      Object.entries(book).forEach((item) => {
+        const [keys, value] = item;
+        bookTextDiv.append(
+          createElement("span", `keys ${classMap[keys]}`, keysTextMap[keys]),
+          createElement("span", `value ${classMap[keys]}`, value),
+        );
       });
 
-      container.append(bookContainer);
+      return bookTextDiv;
     };
 
-    createBook();
+    const createBookCard = (book) => {
+      const bookDiv = createElement("div", "book-div");
+      bookDiv.dataset.id = book.id;
+      bookDiv.append(createBookText(book), createButton(book));
+      return bookDiv;
+    };
 
-    return { createBook, bookContainer };
+    const renderBook = () => {
+      Library.booklist.forEach((book) => {
+        bookContainer.append(createBookCard(book));
+      });
+    };
+
+    const updateBook = () => {
+      bookContainer.textContent = "";
+      renderBook();
+    };
+
+    renderBook();
+    main.append(bookContainer);
+    container.append(main);
+    return { updateBook };
   })();
 
-  const updateBook = () => {
-    createMain.bookContainer.textContent = "";
-    createMain.createBook();
-    return;
-  };
-
-  return { updateBook };
+  return { updateBook: renderMain.updateBook };
 })();
