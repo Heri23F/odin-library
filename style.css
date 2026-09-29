@@ -1,5 +1,5 @@
 body {
-  min-height: 100dvh;
+  height: 100dvh;
   padding: 0;
   margin: 0;
 }
@@ -31,26 +31,26 @@ body {
 
 .main {
   display: grid;
-  grid-template-columns: 40px repeat(6, 1fr) 40px;
-  grid-template-rows: 24px repeat(6, 1fr) 24px;
+  grid-template-columns: 1rem 1fr 1rem;
+  grid-template-rows: 1rem 1fr 1rem;
 }
 
 .book-container {
-  grid-row: 2 / 8;
-  grid-column: 2 / 8;
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(0, 280px));
-  grid-auto-rows: minmax(80px, 1fr);
-  gap: 16px;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .book-div {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 16px;
-  padding: 8px 16px;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
   border: 1px solid black;
 }
 
@@ -60,4 +60,22 @@ body {
   grid-template-rows: repeat(4, auto);
   gap: 4px;
   text-wrap: pretty;
+  font-size: 8px;
+}
+
+.keys,
+.value,
+.colon {
+  font-size: 2em;
+}
+
+.button-div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.remove-button,
+.change-status {
+  width: 5rem;
 }
