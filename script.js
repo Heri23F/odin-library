@@ -140,7 +140,7 @@ premadeLibrary.forEach((book) => {
 const ui = (() => {
   const container = document.querySelector(".container");
 
-  const createElement = (tag, elClass, elText = undefined) => {
+  const createElement = (tag, elClass, elText) => {
     const el = document.createElement(tag);
     if (elClass) {
       el.className = elClass;
@@ -249,7 +249,81 @@ const ui = (() => {
     return;
   };
 
+  const renderModal = (() => {
+    const newBookDialog = createElement("dialog", "new-book");
+    const dialogForm = createElement("form", "dialog-form");
+
+    const createInput = (id) => {
+      const input = document.createElement("input");
+      input.setAttribute("type", "text");
+      input.setAttribute("id", id);
+
+      return input;
+    };
+
+    const createLabel = (id, content) => {
+      const label = document.createElement("label");
+      label.setAttribute("for", id);
+      label.textContent = content;
+
+      return label;
+    };
+
+    const createSelect = (id, selectOption = []) => {
+      const select = document.createElement("select");
+      select.setAttribute("id", id);
+      selectOption.forEach((optionValue) => {
+        const option = document.createElement("option");
+        option.setAttribute("value", optionValue);
+        option.textContent =
+          optionValue.charAt(0).toUpperCase() + optionValue.slice(1);
+
+        select.append(option);
+      });
+
+      return select;
+    };
+
+    const createForminput = () => {
+      const fragments = new DocumentFragment();
+      const formInputMap = {
+        bookAuthor: ["book-author", "Author:"],
+        bookTitle: ["book-title", "Title:"],
+        bookNumOfPages: ["book-pages", "Pages:"],
+      };
+
+      const selectOption = ["read", "no yet read"];
+
+      for (const keys in formInputMap) {
+        const [id, value] = formInputMap[keys];
+        fragments.append(createLabel(id, value), createInput(id));
+      }
+
+      fragments.append(
+        createLabel("book-status", "Status"),
+        createSelect("book-status", selectOption),
+      );
+
+      return fragments;
+    };
+
+    const openDialog = () => {
+      newBookDialog.showModal();
+    };
+    const closeDialog = () => {
+      newBookDialog.close;
+    };
+
+    dialogForm.append(createForminput());
+    newBookDialog.append(dialogForm);
+    container.append(newBookDialog);
+
+    return { openDialog, closeDialog };
+  })();
+
   renderMain.bookContainer.addEventListener("click", clickHandler);
 
   return { updateBook: renderMain.updateBook };
 })();
+
+
