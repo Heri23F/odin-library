@@ -155,9 +155,11 @@ const ui = (() => {
   const renderHeader = (() => {
     const header = createElement("div", "header");
     const logo = createElement("h1", "logo", "My Library");
+    const buttonWraper = createElement("div", "button-wraper");
     const addButton = createElement("button", "add-button", "New Book");
 
-    header.append(logo, addButton);
+    buttonWraper.append(addButton);
+    header.append(logo, buttonWraper);
     container.append(header);
   })();
 
@@ -199,6 +201,7 @@ const ui = (() => {
         const [keys, value] = item;
         bookTextDiv.append(
           createElement("span", `keys ${classMap[keys]}`, keysTextMap[keys]),
+          createElement("span", "colon", ":"),
           createElement("span", `value ${classMap[keys]}`, value),
         );
       });
@@ -325,5 +328,3 @@ const ui = (() => {
 
   return { updateBook: renderMain.updateBook };
 })();
-
-

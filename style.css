@@ -1,13 +1,63 @@
+body {
+  min-height: 100dvh;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #161616;
+  color: #e3e3e3;
+  padding: 16px;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.header .add-button {
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 40px repeat(6, 1fr) 40px;
+  grid-template-rows: 24px repeat(6, 1fr) 24px;
+}
+
+.book-container {
+  grid-row: 2 / 8;
+  grid-column: 2 / 8;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 280px));
+  grid-auto-rows: minmax(80px, 1fr);
+  gap: 16px;
+}
+
+.book-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 16px;
+  border: 1px solid black;
+}
+
 .booktext-div {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-
-  .keys {
-    grid-column: 1 / 2;
-  }
-
-  .value {
-    grid-column: 2 / 3;
-  }
+  grid-template-columns: auto auto 1fr;
+  grid-template-rows: repeat(4, auto);
+  gap: 4px;
+  text-wrap: pretty;
 }
