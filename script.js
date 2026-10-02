@@ -297,12 +297,14 @@ const ui = (() => {
 
     const createForminput = () => {
       const fragments = new DocumentFragment();
+
       const button = createElement("button", "dialog-close", "Confirm");
       button.setAttribute("type", "submit");
+
       const formInputMap = {
-        bookAuthor: ["book-author", "Author:", "text"],
-        bookTitle: ["book-title", "Title:", "text"],
-        bookNumOfPages: ["book-pages", "Pages:", "numeber"],
+        bookAuthor: ["book-author", "Author", "text"],
+        bookTitle: ["book-title", "Title", "text"],
+        bookNumOfPages: ["book-pages", "Pages", "numeber"],
       };
 
       const selectOption = ["read", "no yet read"];
@@ -321,8 +323,15 @@ const ui = (() => {
       return fragments;
     };
 
+    const createFormHeader = () => {
+      const formHeading = createElement("h2", "new-book-detail", "Book Detail");
+      formHeading.setAttribute("id", "book-detail");
+      
+      return formHeading
+    }
+
     dialogForm.append(createForminput());
-    newBookDialog.append(dialogForm);
+    newBookDialog.append(createFormHeader(), dialogForm);
     document.body.append(newBookDialog);
 
     const openDialog = () => {
@@ -342,13 +351,13 @@ const ui = (() => {
       author: form.get("bookauthor"),
       title: form.get("booktitle"),
       pages: Number(form.get("bookpages")),
-      status: form.get("bookstatus")
+      status: form.get("bookstatus"),
     };
 
     Library.addBook(book.author, book.title, book.pages, book.status);
-    renderMain.updateBook()
+    renderMain.updateBook();
     renderModal.closeDialog();
-    renderModal.dialogForm.reset()
+    renderModal.dialogForm.reset();
   });
 
   renderHeader.header.addEventListener("click", (event) => {
