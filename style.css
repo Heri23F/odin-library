@@ -51,7 +51,7 @@ body {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.5rem 1rem;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 .booktext-div {
@@ -110,4 +110,51 @@ body {
   margin: 0;
   text-align: center;
   font-size: 2em;
+}
+
+/* Shadow and animation */
+
+.book-div {
+  box-shadow: 5px 5px 8px 0 rgba(0, 0, 0, 0.65);
+}
+
+.change-status {
+  background-color: #003333;
+  color: #fff;
+  border: 2px solid #003333;
+}
+
+.remove-button {
+  background-color: #660011;
+  color: #fff;
+  border: 2px solid #660011;
+}
+
+.remove-button,
+.change-status {
+  padding: 5px;
+  border-radius: 4px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.35);
+}
+
+.remove-button:active,
+.change-status:active {
+  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+.change-status:hover {
+  background-color: #fff;
+  color: #003333;
+  border: 2px solid #003333;
+}
+
+.remove-button:hover {
+  background-color: #fff;
+  color: #660011;
+  border: 2px solid #660011;
+}
+
+.remove-button,
+.change-status {
+  font-weight: 700;
 }
